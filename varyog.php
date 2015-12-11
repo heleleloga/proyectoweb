@@ -1,45 +1,60 @@
-<?php
 
-$servidor = "localhost";
-$base = "lacteos";
-$login = "root";
-$pass = "";
+<?php 
 
-$con=mysql_connect($servidor,$login,$pass)
- or die ("No se puede conectar");
 
- mysql_select_db($base,$con) or die ("No base datos");
+$servidor='localhost';
+$base='lacteos';
+$login='root';
+$pass='';
 
- $consulta = 'SELECT id, Nombre, Peso, Precio, Disponibilidad FROM yogurt';
 
- $regs = mysql_query($consulta,$con);
+$con = mysql_connect($servidor,$login,$pass)
+       or die("no se pudo conectar");
 
-if (!$regs) {
-	echo "Error" . mysql_error();
-}
+mysql_select_db($base, $con) or die('no basedatos');
 
-echo '<table border= "2px">';
-	echo '<tr> <td> id </td> <td> Nombre </td> <td> Peso </td> <td> Precio </td> <td> Disponibilidad </td> <td> editar </td>';
+$consulta=mysql_query(' SELECT * FROM yogurt');
 
- while ($reg = mysql_fetch_array($regs)) {
 ?>
-
-<tr>
-	<td><?php echo $reg['id'];?></td>
-	<td><?php echo $reg['Nombre'];?></td>
-	<td><?php echo $reg['Peso'];?></td>
-	<td><?php echo $reg['Precio'];?></td>
-	<td><?php echo $reg['Disponibilidad'];?></td>
-	
-	<td>
-	<a href="usuarios_eliminar.php?codigo=<?php echo $reg['id'];?>">eliminar</a> 
-	<a href="usuarios_eliminar.php">editar</a>
-</td>
-
-</tr>
+<body style="background-image:url(images.jpg)">
+<ul><li><h2><a href="index.php">Pagina Principal</a></h2></li></ul>
  
- <?php	
- }
+<ul><li><h2><a href="yogurt_nuevo.php">Nuevos Producto</a></h2></li></ul>
 
+<table border="10px" style="background-color:#B9B9F0">
+ 			<tr style="background-color:#B9B9C0;color:#1E78C3">
+ 				<td>ID</td>
+ 				<td> Nombre.</td>
+ 				<td> Peso  .</td>
+ 				<td> Precio  .</td>
+ 				<td> Disponibilidad  .</td>
+ 				<td> EDITAR  .</td>
+			</tr>
+
+<?php 
+	while ($fila = mysql_fetch_array($consulta)) {
 ?>
- </table>
+	<tr>
+		<td><?php echo $fila['id']; ?></td>
+		<td><?php echo $fila['Nombre']; ?></td>
+		<td><?php echo $fila['Peso']; ?></td>
+		<td><?php echo $fila['Precio']; ?></td>
+		<td><?php echo $fila['Disponibilidad']; ?></td>
+	
+		<td><a href="yogurt_editar.php?codigo=<?php echo $fila['id']?>">editar</a>
+		<a href="yogurt_eliminar.php?codigo=<?php echo $fila['id']?>">eliminar</a></td>
+				
+
+	</tr>
+
+	<?php 
+		}		
+	 ?>
+</table>
+<center>
+<img src="">
+</center>
+
+
+
+

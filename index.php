@@ -31,6 +31,8 @@
 	<li><a href="varareq.php"> AREQUIPE </a></li>
 
 </ul>
+ <body background="imagen.jpg" />
+<img src="">
 
 </body>
 </html>
